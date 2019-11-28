@@ -10,7 +10,7 @@ public class GreedLocalEndClusterer implements IClusterer {
 
     public Graph handle(Graph graph) {
         Set<Integer> vertexSet, set1, set2;
-        vertexSet = graph.getVertexSet();
+        vertexSet = new HashSet<Integer>(graph.getVertexList());
         set1 = new HashSet<Integer>();
         set2 = new HashSet<Integer>();
         for (Integer v : vertexSet) {

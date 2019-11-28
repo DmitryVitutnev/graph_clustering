@@ -3,17 +3,22 @@ package clusterers;
 import graph.Graph;
 import graph.GraphFactory;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
-public class GreedClusterer implements IClusterer {
+public class GreedSortedAscClusterer implements IClusterer {
 
-    public Graph handle(Graph graph) {
+    public Graph handle(final Graph graph) {
         Set<Integer> vertexSet, set1, set2;
-        vertexSet = new HashSet<Integer>(graph.getVertexList());
+        List<Integer> vertexList = graph.getVertexList();
+        Collections.sort(vertexList, new Comparator<Integer>() {
+            public int compare(Integer o1, Integer o2) {
+                return graph.getVertexDegree(o1) - graph.getVertexDegree(o2);
+            }
+        });
+
         set1 = new HashSet<Integer>();
         set2 = new HashSet<Integer>();
-        for (Integer v : vertexSet) {
+        for (Integer v : vertexList) {
             int koef1 = 0, koef2 = 0;
             for (Integer v1 : set1) {
                 if (graph.getEdge(v, v1)) {
@@ -42,7 +47,7 @@ public class GreedClusterer implements IClusterer {
 
     @Override
     public String toString() {
-        return "Greed";
+        return "GreedSortedAsc";
     }
 
 }

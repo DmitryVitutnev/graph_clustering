@@ -1,13 +1,16 @@
 package graph;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class Graph {
 
     private int n;
     private boolean[][] edges;
-    private Set<Integer> vertexSet;
+    private List<Integer> vertexList;
+    private int[] degrees;
 
     public Graph(int n) {
         this.n = n;
@@ -15,9 +18,13 @@ public class Graph {
             return;
         }
         edges = new boolean[n][n];
-        vertexSet = new HashSet<Integer>();
+        vertexList = new ArrayList<Integer>();
         for (int i = 0; i < n; i++) {
-            vertexSet.add(i);
+            vertexList.add(i);
+        }
+        degrees = new int[n];
+        for(int i = 0; i < n; i++) {
+            degrees[i] = 0;
         }
     }
 
@@ -25,8 +32,8 @@ public class Graph {
         return n;
     }
 
-    public Set<Integer> getVertexSet() {
-        return vertexSet;
+    public List<Integer> getVertexList() {
+        return vertexList;
     }
 
     public boolean getEdge(int v1, int v2) {
@@ -37,8 +44,18 @@ public class Graph {
         if (v1 == v2) {
             return;
         }
+        if(edges[v1][v2] == value) {
+            return;
+        }
         edges[v1][v2] = value;
         edges[v2][v1] = value;
+        if(value) {
+            degrees[v1]++;
+            degrees[v2]++;
+        } else {
+            degrees[v1]--;
+            degrees[v2]--;
+        }
     }
 
     public int countEdges() {
@@ -54,7 +71,7 @@ public class Graph {
     }
 
     public int getVertexDegree(int v) {
-        return getVertexNeighbours(v).size();
+        return degrees[v];
     }
 
     public Set<Integer> getVertexNeighbours(int v) {

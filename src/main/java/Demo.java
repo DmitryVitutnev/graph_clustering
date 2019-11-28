@@ -30,11 +30,13 @@ public class Demo {
         clusterers.add(new BBCLocalClusterer());
         clusterers.add(new GreedLocalClusterer());
         clusterers.add(new GreedLocalEndClusterer());
+        clusterers.add(new GreedSortedDescClusterer());
+        clusterers.add(new GreedSortedAscClusterer());
 
         List<List<Integer>> results = new ArrayList<List<Integer>>();
 
         for(int i = 0; i < clusterers.size(); i++) {
-            results.add(testClusterer(clusterers.get(i), 0.33, 10000));
+            results.add(testClusterer(clusterers.get(i), 0.33, 1000));
         }
 
         for(int i = 0; i < clusterers.size(); i++) {
@@ -53,7 +55,7 @@ public class Demo {
         pw.printf("%8s |", "Vertexes");
 
         for(int i = 0; i < clusterers.size(); i++) {
-            pw.printf(" %10s", clusterers.get(i));
+            pw.printf(" %20s", clusterers.get(i));
         }
         pw.println();
 
@@ -61,12 +63,24 @@ public class Demo {
             pw.printf("%8d |", i+1);
             for(int j = 0; j < results.size(); j++) {
                 if(i < results.get(j).size()) {
-                    pw.printf(" %10s", results.get(j).get(i));
+                    pw.printf(" %20s", results.get(j).get(i));
                 }
             }
             pw.println();
             pw.flush();
         }
+
+        /*compareClusterers(clusterers.get(0), clusterers.get(1), 0.33, 1000);
+        compareClusterers(clusterers.get(0), clusterers.get(2), 0.33, 1000);
+        compareClusterers(clusterers.get(1), clusterers.get(2), 0.33, 1000);
+
+        compareClusterers(clusterers.get(0), clusterers.get(1), 0.5, 1000);
+        compareClusterers(clusterers.get(0), clusterers.get(2), 0.5, 1000);
+        compareClusterers(clusterers.get(1), clusterers.get(2), 0.5, 1000);
+
+        compareClusterers(clusterers.get(0), clusterers.get(1), 0.66, 1000);
+        compareClusterers(clusterers.get(0), clusterers.get(2), 0.66, 1000);
+        compareClusterers(clusterers.get(1), clusterers.get(2), 0.66, 1000);*/
 
     }
 

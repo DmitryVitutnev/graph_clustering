@@ -11,7 +11,7 @@ public class ChessClusterer implements IClusterer {
     public Graph handle(Graph graph) {
         //Create list with vertices and their degrees
         List<Vertex> vertices = new ArrayList<Vertex>();
-        for (Integer v : graph.getVertexSet()) {
+        for (Integer v : graph.getVertexList()) {
             vertices.add(new Vertex(v, graph.getVertexDegree(v)));
         }
 

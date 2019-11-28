@@ -13,7 +13,7 @@ public class BBCLocalClusterer implements IClusterer {
 
     public Graph handle(Graph graph) {
         List<Graph> list = new LinkedList<Graph>();
-        for (Integer v : graph.getVertexSet()) {
+        for (Integer v : graph.getVertexList()) {
             list.add(subClustering(graph, v));
         }
         int min = graph.getN() * graph.getN();
@@ -30,7 +30,7 @@ public class BBCLocalClusterer implements IClusterer {
 
     private Graph subClustering(Graph graph, int mainVertex) {
         Set<Integer> vertexSet, set1, set2;
-        vertexSet = graph.getVertexSet();
+        vertexSet = new HashSet<Integer>(graph.getVertexList());
         set1 = new HashSet<Integer>();
         set1.add(mainVertex);
         set1.addAll(graph.getVertexNeighbours(mainVertex));
