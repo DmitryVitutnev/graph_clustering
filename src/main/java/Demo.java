@@ -19,7 +19,7 @@ public class Demo {
         GraphFactory factory = new GraphFactory();
 
         graphs = new ArrayList<Graph>();
-        for(int i = 0; i < 1000; i++) {
+        for(int i = 0; i < 1800; i++) {
             graphs.add(factory.generateRandom(i, 0.33, 42));
         }
 
@@ -36,7 +36,7 @@ public class Demo {
         List<List<Integer>> results = new ArrayList<List<Integer>>();
 
         for(int i = 0; i < clusterers.size(); i++) {
-            results.add(testClusterer(clusterers.get(i), 0.33, 1000));
+            results.add(testClusterer(clusterers.get(i), 0.33, 100000));
         }
 
         for(int i = 0; i < clusterers.size(); i++) {
@@ -70,17 +70,17 @@ public class Demo {
             pw.flush();
         }
 
-        /*compareClusterers(clusterers.get(0), clusterers.get(1), 0.33, 1000);
-        compareClusterers(clusterers.get(0), clusterers.get(2), 0.33, 1000);
-        compareClusterers(clusterers.get(1), clusterers.get(2), 0.33, 1000);
+        /*compareClusterers(clusterers.get(0), clusterers.get(1), 0.33, 100000);
+        compareClusterers(clusterers.get(0), clusterers.get(2), 0.33, 100000);
+        compareClusterers(clusterers.get(1), clusterers.get(2), 0.33, 100000);
 
-        compareClusterers(clusterers.get(0), clusterers.get(1), 0.5, 1000);
-        compareClusterers(clusterers.get(0), clusterers.get(2), 0.5, 1000);
-        compareClusterers(clusterers.get(1), clusterers.get(2), 0.5, 1000);
+        compareClusterers(clusterers.get(0), clusterers.get(1), 0.5, 100000);
+        compareClusterers(clusterers.get(0), clusterers.get(2), 0.5, 100000);
+        compareClusterers(clusterers.get(1), clusterers.get(2), 0.5, 100000);
 
-        compareClusterers(clusterers.get(0), clusterers.get(1), 0.66, 1000);
-        compareClusterers(clusterers.get(0), clusterers.get(2), 0.66, 1000);
-        compareClusterers(clusterers.get(1), clusterers.get(2), 0.66, 1000);*/
+        compareClusterers(clusterers.get(0), clusterers.get(1), 0.66, 100000);
+        compareClusterers(clusterers.get(0), clusterers.get(2), 0.66, 100000);
+        compareClusterers(clusterers.get(1), clusterers.get(2), 0.66, 100000);*/
 
     }
 
