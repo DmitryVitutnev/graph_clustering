@@ -47,6 +47,6 @@ public class BruteClusterer implements IClusterer {
 
     @Override
     public String toString() {
-        return "Brute";
+        return "Br";
     }
 }

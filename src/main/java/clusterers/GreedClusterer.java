@@ -42,7 +42,7 @@ public class GreedClusterer implements IClusterer {
 
     @Override
     public String toString() {
-        return "Greed";
+        return "Gr";
     }
 
 }

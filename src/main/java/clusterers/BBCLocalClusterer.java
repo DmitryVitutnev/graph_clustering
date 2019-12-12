@@ -120,7 +120,7 @@ public class BBCLocalClusterer implements IClusterer {
 
     @Override
     public String toString() {
-        return "BBCLocal";
+        return "BBCL";
     }
 
 }

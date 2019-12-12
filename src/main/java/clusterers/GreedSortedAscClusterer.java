@@ -47,7 +47,7 @@ public class GreedSortedAscClusterer implements IClusterer {
 
     @Override
     public String toString() {
-        return "GreedSortedAsc";
+        return "GrSA";
     }
 
 }

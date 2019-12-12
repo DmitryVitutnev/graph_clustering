@@ -19,7 +19,7 @@ public class Demo {
         GraphFactory factory = new GraphFactory();
 
         graphs = new ArrayList<Graph>();
-        for(int i = 0; i < 1800; i++) {
+        for(int i = 0; i < 1000; i++) {
             graphs.add(factory.generateRandom(i, 0.33, 42));
         }
 
@@ -32,11 +32,13 @@ public class Demo {
         clusterers.add(new GreedLocalEndClusterer());
         clusterers.add(new GreedSortedDescClusterer());
         clusterers.add(new GreedSortedAscClusterer());
+        clusterers.add(new GreedSortedTriangleDescClusterer());
+        clusterers.add(new GreedSortedTriangleAscClusterer());
 
         List<List<Integer>> results = new ArrayList<List<Integer>>();
 
         for(int i = 0; i < clusterers.size(); i++) {
-            results.add(testClusterer(clusterers.get(i), 0.33, 100000));
+            results.add(testClusterer(clusterers.get(i), 0.33, 1000));
         }
 
         for(int i = 0; i < clusterers.size(); i++) {
@@ -55,7 +57,7 @@ public class Demo {
         pw.printf("%8s |", "Vertexes");
 
         for(int i = 0; i < clusterers.size(); i++) {
-            pw.printf(" %20s", clusterers.get(i));
+            pw.printf(" %7s", clusterers.get(i));
         }
         pw.println();
 
@@ -63,7 +65,7 @@ public class Demo {
             pw.printf("%8d |", i+1);
             for(int j = 0; j < results.size(); j++) {
                 if(i < results.get(j).size()) {
-                    pw.printf(" %20s", results.get(j).get(i));
+                    pw.printf(" %7s", results.get(j).get(i));
                 }
             }
             pw.println();

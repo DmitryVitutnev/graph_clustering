@@ -5,14 +5,31 @@ import graph.GraphFactory;
 
 import java.util.*;
 
-public class GreedSortedDescClusterer implements IClusterer {
+public class GreedSortedTriangleAscClusterer implements IClusterer {
 
     public Graph handle(final Graph graph) {
-        Set<Integer> vertexSet, set1, set2;
+        Set<Integer> set1, set2;
         List<Integer> vertexList = graph.getVertexList();
+        int n = graph.getN();
+        final int[] trDegrees = new int[n];
+        for(int i = 0; i < n; i++) {
+            trDegrees[i] = 0;
+        }
+        for(int i = 0; i < n; i++) {
+            for(int j = i + 1; j < n; j++) {
+                for(int k = j + 1; k < n; k++) {
+                    if(graph.getEdge(i, j) && graph.getEdge(i, k) && graph.getEdge(k, j)) {
+                        trDegrees[i]++;
+                        trDegrees[j]++;
+                        trDegrees[k]++;
+                    }
+                }
+            }
+        }
+
         Collections.sort(vertexList, new Comparator<Integer>() {
             public int compare(Integer o1, Integer o2) {
-                return graph.getVertexDegree(o2) - graph.getVertexDegree(o1);
+                return trDegrees[o1] - trDegrees[o2];
             }
         });
 
@@ -47,7 +64,7 @@ public class GreedSortedDescClusterer implements IClusterer {
 
     @Override
     public String toString() {
-        return "GrSD";
+        return "GrSTA";
     }
 
 }

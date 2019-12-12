@@ -118,7 +118,7 @@ public class GreedLocalEndClusterer implements IClusterer {
 
     @Override
     public String toString() {
-        return "GreedLEnd";
+        return "GrLE";
     }
 
 }
