@@ -14,12 +14,13 @@ public class Demo {
 
     public static void main(String[] args) throws IOException {
 
-        pw = new PrintWriter(new BufferedOutputStream(new FileOutputStream(new File("results/comparation.txt"))));
+        pw = new PrintWriter(new BufferedOutputStream(new FileOutputStream(new File("results/comparation.csv"))));
 
         GraphFactory factory = new GraphFactory();
 
         graphs = new ArrayList<Graph>();
-        for(int i = 0; i < 1000; i++) {
+        for(int i = 0; i < 500; i++) {
+            //graphs.add(factory.generateRandom(i, 0.33, 42));
             graphs.add(factory.generateRandom(i, 0.33, 42));
         }
 
@@ -28,17 +29,19 @@ public class Demo {
         clusterers.add(new BBCClusterer());
         clusterers.add(new GreedClusterer());
         clusterers.add(new BBCLocalClusterer());
-        clusterers.add(new GreedLocalClusterer());
-        clusterers.add(new GreedLocalEndClusterer());
-        clusterers.add(new GreedSortedDescClusterer());
-        clusterers.add(new GreedSortedAscClusterer());
-        clusterers.add(new GreedSortedTriangleDescClusterer());
-        clusterers.add(new GreedSortedTriangleAscClusterer());
+        //clusterers.add(new GreedLocalClusterer());
+        //clusterers.add(new GreedLocalEndClusterer());
+        //clusterers.add(new GreedSortedDescClusterer());
+        //clusterers.add(new GreedSortedAscClusterer());
+        //clusterers.add(new GreedSortedTriangleDescClusterer());
+        //clusterers.add(new GreedSortedTriangleAscClusterer());
+        clusterers.add(new AllInOneClusterer());
+        clusterers.add(new SmartGreedClusterer());
 
         List<List<Integer>> results = new ArrayList<List<Integer>>();
 
         for(int i = 0; i < clusterers.size(); i++) {
-            results.add(testClusterer(clusterers.get(i), 0.33, 1000));
+            results.add(testClusterer(clusterers.get(i), 0.33, 500));
         }
 
         for(int i = 0; i < clusterers.size(); i++) {
@@ -54,18 +57,18 @@ public class Demo {
             }
         }
 
-        pw.printf("%8s |", "Vertexes");
+        pw.printf("%8s ;", "Vertexes");
 
         for(int i = 0; i < clusterers.size(); i++) {
-            pw.printf(" %7s", clusterers.get(i));
+            pw.printf(" %7s;", clusterers.get(i));
         }
         pw.println();
 
         for(int i = 0; i < results.get(0).size(); i++) {
-            pw.printf("%8d |", i+1);
+            pw.printf("%8d ;", i+1);
             for(int j = 0; j < results.size(); j++) {
                 if(i < results.get(j).size()) {
-                    pw.printf(" %7s", results.get(j).get(i));
+                    pw.printf(" %7s;", results.get(j).get(i));
                 }
             }
             pw.println();
