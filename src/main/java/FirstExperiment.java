@@ -27,7 +27,7 @@ public class FirstExperiment {
         IClusterer etalon = new BBCClusterer();
 
         for (Double p : pList) {
-            doExperiment(p, 500, 1, clusterers, etalon);
+            doExperiment(p, 300, 1, clusterers, etalon);
         }
 
     }
@@ -50,9 +50,9 @@ public class FirstExperiment {
 
         double etalonResult, result, accuracy;
 
-        pw.print("Vertexes;");
+        pw.print("Vertexes,");
         for(IClusterer c : clusterers) {
-            pw.print(c + ";");
+            pw.print(c + ",");
         }
         pw.println();
 
@@ -73,7 +73,7 @@ public class FirstExperiment {
             etalonResult /= iterationsPerN;
 
 
-            pw.print("" + n + ";");
+            pw.print("" + n + ",");
             for(IClusterer c : clusterers) {
                 result = 0.;
                 for (Graph g : graphs) {
@@ -83,7 +83,7 @@ public class FirstExperiment {
                 }
                 result /= iterationsPerN;
                 accuracy = result == etalonResult ? 1 : result / etalonResult;
-                pw.print("" + accuracy + ";");
+                pw.print("" + accuracy + ",");
             }
             pw.println();
             pw.flush();
