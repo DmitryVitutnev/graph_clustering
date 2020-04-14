@@ -25,7 +25,7 @@ public class SecondExperiment {
         IClusterer etalon = new BBCClusterer();
 
         for (Double p : pList) {
-            doExperiment(p, 100, 1, clusterers, etalon);
+            doExperiment(p, 300, 1, clusterers, etalon);
         }
 
     }
