@@ -27,7 +27,7 @@ public class FirstExperiment {
         IClusterer etalon = new BBCClusterer();
 
         for (Double p : pList) {
-            doExperiment(p, 100, 100, clusterers, etalon);
+            doExperiment(p, 60, 100, clusterers, etalon);
         }
 
     }
@@ -64,25 +64,24 @@ public class FirstExperiment {
                 graphs.add(factory.generateRandom(n, p, 31));
             }
 
-            etalonResult = 0.;
-            for (Graph g : graphs) {
-                cluster = etalonClusterer.handle(g);
-                diff = GraphFunctions.symmetricDifference(g, cluster);
-                etalonResult += diff.countEdges();
-            }
-            etalonResult /= iterationsPerN;
-
 
             pw.print("" + n + ",");
             for(IClusterer c : clusterers) {
                 result = 0.;
+                etalonResult = 0.;
+                accuracy = 0.;
                 for (Graph g : graphs) {
+                    cluster = etalonClusterer.handle(g);
+                    diff = GraphFunctions.symmetricDifference(g, cluster);
+                    etalonResult = diff.countEdges();
+
                     cluster = c.handle(g);
                     diff = GraphFunctions.symmetricDifference(g, cluster);
-                    result += diff.countEdges();
+                    result = diff.countEdges();
+
+                    accuracy += result == etalonResult ? 1 : result / etalonResult;
                 }
-                result /= iterationsPerN;
-                accuracy = result == etalonResult ? 1 : result / etalonResult;
+                accuracy /= iterationsPerN;
                 pw.print("" + accuracy + ",");
             }
             pw.println();
