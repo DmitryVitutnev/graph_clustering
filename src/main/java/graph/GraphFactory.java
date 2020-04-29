@@ -7,12 +7,11 @@ public class GraphFactory {
 
 
     public Graph generateRandom(int n, double edgeKoef, long seed) {
-        Random random = new Random(seed);
         Graph result = new Graph(n);
         double randomValue;
         for (int i = 0; i < n; i++) {
             for (int j = i + 1; j < n; j++) {
-                randomValue = random.nextDouble();
+                randomValue = Math.random();
                 if (randomValue < edgeKoef) {
                     result.setEdge(i, j, true);
                 }
