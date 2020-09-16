@@ -14,34 +14,37 @@ public class Demo {
 
     public static void main(String[] args) throws IOException {
 
+        long startTime = System.currentTimeMillis();
+
         pw = new PrintWriter(new BufferedOutputStream(new FileOutputStream(new File("results/comparation.csv"))));
 
         GraphFactory factory = new GraphFactory();
 
         graphs = new ArrayList<Graph>();
-        for(int i = 0; i < 1000; i++) {
+        for(int i = 0; i < 30; i++) {
             //graphs.add(factory.generateRandom(i, 0.33, 42));
             graphs.add(factory.generateRandom(i, 0.33, 42));
         }
 
         List<IClusterer> clusterers = new ArrayList<IClusterer>();
-        clusterers.add(new BruteClusterer());
-        clusterers.add(new BBCClusterer());
-        clusterers.add(new GreedClusterer());
+        //clusterers.add(new BruteClusterer());
+        //clusterers.add(new BBCClusterer());
+        //clusterers.add(new GreedClusterer());
         //clusterers.add(new BBCLocalClusterer());
         //clusterers.add(new GreedLocalClusterer());
         //clusterers.add(new GreedLocalEndClusterer());
-        clusterers.add(new GreedSortedDescClusterer());
-        clusterers.add(new GreedSortedAscClusterer());
-        clusterers.add(new GreedSortedTriangleDescClusterer());
-        clusterers.add(new GreedSortedTriangleAscClusterer());
+        //clusterers.add(new GreedSortedDescClusterer());
+        //clusterers.add(new GreedSortedAscClusterer());
+        //clusterers.add(new GreedSortedTriangleDescClusterer());
+        //clusterers.add(new GreedSortedTriangleAscClusterer());
         //clusterers.add(new AllInOneClusterer());
         //clusterers.add(new SmartGreedClusterer());
+        clusterers.add(new BaBClusterer());
 
         List<List<Integer>> results = new ArrayList<List<Integer>>();
 
         for(int i = 0; i < clusterers.size(); i++) {
-            results.add(testClusterer(clusterers.get(i), 0.33, 10000));
+            results.add(testClusterer(clusterers.get(i), 0.33, 10000000));
         }
 
         for(int i = 0; i < clusterers.size(); i++) {
@@ -69,7 +72,7 @@ public class Demo {
             pw.printf("%8d ;", i);
             for(int j = 0; j < results.size(); j++) {
                 if(i < results.get(j).size()) {
-                    pw.printf(" %f;", results.get(j).get(i) * 2. / (i * i));
+                    pw.printf(" %d;", results.get(j).get(i));
                 }
             }
             pw.println();
@@ -87,6 +90,11 @@ public class Demo {
         compareClusterers(clusterers.get(0), clusterers.get(1), 0.66, 100000);
         compareClusterers(clusterers.get(0), clusterers.get(2), 0.66, 100000);
         compareClusterers(clusterers.get(1), clusterers.get(2), 0.66, 100000);*/
+
+
+        long timeSpent = System.currentTimeMillis() - startTime;
+
+        System.out.println(timeSpent);
 
     }
 
