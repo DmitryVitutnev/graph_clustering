@@ -19,7 +19,7 @@ public class TimeTestDemo {
 
         GraphFactory factory = new GraphFactory();
 
-        Graph graph = factory.generateRandom(35, 0.33, (int)(Math.random()*42));
+        Graph graph = factory.generateRandom(30, 0.33, (int)(Math.random()*42));
 
         IClusterer clusterer = new BaBClusterer();
 
@@ -29,7 +29,7 @@ public class TimeTestDemo {
 
         long timeSpent = System.currentTimeMillis() - startTime;
 
-        System.out.println(timeSpent);
+        System.out.println(timeSpent * 0.001);
         System.out.println();
         //System.out.println(result);
 

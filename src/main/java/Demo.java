@@ -21,15 +21,15 @@ public class Demo {
         GraphFactory factory = new GraphFactory();
 
         graphs = new ArrayList<Graph>();
-        for(int i = 0; i < 30; i++) {
+        for(int i = 0; i < 10; i++) {
             //graphs.add(factory.generateRandom(i, 0.33, 42));
             graphs.add(factory.generateRandom(i, 0.33, 42));
         }
 
         List<IClusterer> clusterers = new ArrayList<IClusterer>();
         //clusterers.add(new BruteClusterer());
-        //clusterers.add(new BBCClusterer());
-        //clusterers.add(new GreedClusterer());
+        clusterers.add(new BBCClusterer());
+        clusterers.add(new GreedClusterer());
         //clusterers.add(new BBCLocalClusterer());
         //clusterers.add(new GreedLocalClusterer());
         //clusterers.add(new GreedLocalEndClusterer());
@@ -44,7 +44,7 @@ public class Demo {
         List<List<Integer>> results = new ArrayList<List<Integer>>();
 
         for(int i = 0; i < clusterers.size(); i++) {
-            results.add(testClusterer(clusterers.get(i), 0.33, 10000000));
+            results.add(testClusterer(clusterers.get(i), 0.33, 10000));
         }
 
         for(int i = 0; i < clusterers.size(); i++) {

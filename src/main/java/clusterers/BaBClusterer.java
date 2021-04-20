@@ -2,6 +2,7 @@ package clusterers;
 
 import graph.Graph;
 import graph.GraphFactory;
+import graph.GraphFunctions;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -18,7 +19,13 @@ public class BaBClusterer implements IClusterer {
         Set<Integer> set2 = new HashSet<>();
         boolean[] array = new boolean[graph.getN()];
 
-        recur(graph, 0, graph.getN(), 0, set1, set2, Integer.MAX_VALUE, array);
+        IClusterer approximateClusterer = new GreedClusterer();
+        Graph approximate = approximateClusterer.handle(graph);
+        int greedRecord = Integer.MAX_VALUE;
+
+        //greedRecord = GraphFunctions.symmetricDifference(graph, approximate).countEdges();
+
+        recur(graph, 0, graph.getN(), 0, set1, set2, greedRecord, array);
 
         set1.clear();
         set2.clear();
