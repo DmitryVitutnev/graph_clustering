@@ -35,7 +35,7 @@ public class ClustererComparation {
 
         double etalonResult, result, accuracy;
 
-        pw.print("Vertices,");
+        pw.print("Vertexes,");
         for(IClusterer c : clusterers) {
             pw.print(c + ",");
         }

@@ -25,7 +25,7 @@ public class FirstExperimentWithBaB {
         IClusterer etalon = new BaBClusterer();
 
         for (Double p : pList) {
-            doExperiment(p, 30, 10, clusterers, etalon);
+            doExperiment(p, 20, 100, clusterers, etalon);
         }
 
     }
