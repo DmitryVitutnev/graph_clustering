@@ -17,7 +17,7 @@ public class Main {
         int wins1 = 0;
         int wins2 = 0;
         for (int i = 1; i <= 100; i++) {
-            Graph graph = factory.generateRandom(i, 0.3, 42);
+            Graph graph = factory.generateRandom(i, 0.3);
             Graph bbcClusteredGraph = clusterer1.handle(graph);
             Graph bbcDifferenceGraph = GraphFunctions.symmetricDifference(graph, bbcClusteredGraph);
             Graph chessClusteredGraph = clusterer2.handle(graph);

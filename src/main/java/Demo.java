@@ -23,7 +23,7 @@ public class Demo {
         graphs = new ArrayList<Graph>();
         for(int i = 0; i < 10; i++) {
             //graphs.add(factory.generateRandom(i, 0.33, 42));
-            graphs.add(factory.generateRandom(i, 0.33, 42));
+            graphs.add(factory.generateRandom(i, 0.33));
         }
 
         List<IClusterer> clusterers = new ArrayList<IClusterer>();
@@ -115,7 +115,7 @@ public class Demo {
         while(curTime < endTime) {
             StringBuilder sb = new StringBuilder();
 
-            Graph graph = factory.generateRandom(i, edgeKoef, 42);
+            Graph graph = factory.generateRandom(i, edgeKoef);
             Graph graph1 = clusterer1.handle(graph);
             Graph dGraph1 = GraphFunctions.symmetricDifference(graph, graph1);
             Graph graph2 = clusterer2.handle(graph);

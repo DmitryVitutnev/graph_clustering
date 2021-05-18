@@ -6,7 +6,7 @@ import java.util.Set;
 public class GraphFactory {
 
 
-    public Graph generateRandom(int n, double edgeKoef, long seed) {
+    public Graph generateRandom(int n, double edgeKoef) {
         Graph result = new Graph(n);
         double randomValue;
         for (int i = 0; i < n; i++) {

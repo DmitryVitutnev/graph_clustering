@@ -19,7 +19,7 @@ public class TimeTestDemo {
 
         GraphFactory factory = new GraphFactory();
 
-        Graph graph = factory.generateRandom(30, 0.33, (int)(Math.random()*42));
+        Graph graph = factory.generateRandom(30, 0.33);
 
         IClusterer clusterer = new BaBClusterer();
 

@@ -59,7 +59,7 @@ public class SecondExperiment {
         for (int n = 1; n <= maxN; n++) {
             graphs.clear();
             for (int i = 0; i < iterationsPerN; i++) {
-                graphs.add(factory.generateRandom(n, p, 31));
+                graphs.add(factory.generateRandom(n, p));
             }
 
 
