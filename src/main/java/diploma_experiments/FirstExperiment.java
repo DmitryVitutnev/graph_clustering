@@ -27,7 +27,7 @@ public class FirstExperiment {
 
     public static void main(String[] args) throws IOException {
 
-        List<Double> pList = Arrays.asList(0.33, 0.5, 0.66);
+        List<Double> pList = Arrays.asList(0.1, 0.33, 0.5, 0.6, 0.9);
 
         List<IClusterer> clusterers = new ArrayList<IClusterer>();
         clusterers.add(new GreedClusterer());
