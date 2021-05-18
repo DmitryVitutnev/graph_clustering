@@ -43,7 +43,7 @@ public class SecondExperiment {
 
 
     public static void doExperiment(double p, int maxN, int iterationsPerN, List<IClusterer> clusterers, IClusterer etalonClusterer) throws IOException {
-        String directory = "results_diploma/local_sort/";
+        String directory = "results_diploma/local_search/";
 
         Path path = Paths.get(directory);
 
