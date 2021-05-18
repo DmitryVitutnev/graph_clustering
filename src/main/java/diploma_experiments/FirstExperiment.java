@@ -37,7 +37,7 @@ public class FirstExperiment {
         IClusterer etalon = new GreedClusterer();
 
         for (Double p : pList) {
-            doExperiment(p, 200, 1, clusterers, etalon);
+            doExperiment(p, 100, 1000, clusterers, etalon);
         }
 
     }
