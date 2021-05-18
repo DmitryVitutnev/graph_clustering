@@ -37,7 +37,7 @@ public class FirstExperiment {
         IClusterer etalon = new GreedClusterer();
 
         for (Double p : pList) {
-            doExperiment(p, 200, 10, clusterers, etalon);
+            doExperiment(p, 200, 100, clusterers, etalon);
         }
 
     }
@@ -80,9 +80,8 @@ public class FirstExperiment {
         for (int n = 1; n <= maxN; n++) {
             graphs.clear();
             for (int i = 0; i < iterationsPerN; i++) {
-                graphs.add(factory.generateRandom(n, p, 31));
+                graphs.add(factory.generateRandom(n, p, 31*i));
             }
-
 
             pw.print("" + n + ",");
             for(IClusterer c : clusterers) {
