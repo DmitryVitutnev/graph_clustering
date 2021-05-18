@@ -1,11 +1,10 @@
 package diploma_experiments;
 
-import clusterers.BBCClusterer;
 import clusterers.GreedClusterer;
+import clusterers.GreedLocalClusterer;
+import clusterers.GreedLocalEndClusterer;
 import clusterers.GreedSortedAscClusterer;
 import clusterers.GreedSortedDescClusterer;
-import clusterers.GreedSortedTriangleAscClusterer;
-import clusterers.GreedSortedTriangleDescClusterer;
 import clusterers.IClusterer;
 import graph.Graph;
 import graph.GraphFactory;
@@ -23,16 +22,16 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class FirstExperiment {
+public class LocalSearchExperiment {
 
     public static void main(String[] args) throws IOException {
 
-        List<Double> pList = Arrays.asList(0.1, 0.33, 0.5, 0.6, 0.9);
+        List<Double> pList = Arrays.asList(0.1, 0.33, 0.5, 0.66, 0.9);
 
         List<IClusterer> clusterers = new ArrayList<IClusterer>();
         clusterers.add(new GreedClusterer());
-        clusterers.add(new GreedSortedDescClusterer());
-        clusterers.add(new GreedSortedAscClusterer());
+        clusterers.add(new GreedLocalEndClusterer());
+        clusterers.add(new GreedLocalClusterer());
 
         IClusterer etalon = new GreedClusterer();
 
@@ -44,7 +43,7 @@ public class FirstExperiment {
 
 
     public static void doExperiment(double p, int maxN, int iterationsPerN, List<IClusterer> clusterers, IClusterer etalonClusterer) throws IOException {
-        String directory = "results_diploma/sorting/";
+        String directory = "results_diploma/local_search/";
 
         Path path = Paths.get(directory);
 
