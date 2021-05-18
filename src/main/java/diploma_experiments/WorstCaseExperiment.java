@@ -19,6 +19,7 @@ import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
@@ -34,7 +35,7 @@ public class WorstCaseExperiment {
         clusterers.add(new GreedLocalEndClusterer());
 
         IClusterer etalon = new BaBClusterer();
-        doExperiment(7, clusterers, etalon);
+        doExperimentRandomized(11, clusterers, etalon, 1000);
     }
 
     public static void doExperiment(int maxN, List<IClusterer> clusterers, IClusterer etalonClusterer) throws IOException {
@@ -68,6 +69,37 @@ public class WorstCaseExperiment {
 
     }
 
+    public static void doExperimentRandomized(int maxN, List<IClusterer> clusterers, IClusterer etalonClusterer, float maxTime) throws IOException {
+        String directory = "results_diploma/worst_case_randomized/";
+
+        Path path = Paths.get(directory);
+
+        if (!Files.exists(path)) {
+            Files.createDirectory(path);
+        }
+
+        PrintWriter pw = new PrintWriter(new BufferedOutputStream(new FileOutputStream(new File(
+                directory + "experiment.csv"))));
+
+        pw.print("Vertices,");
+        for(IClusterer c : clusterers) {
+            pw.print(c + ",");
+        }
+        pw.println();
+
+        double accuracy;
+        for (int n = 1; n <= maxN; n++) {
+            pw.print("" + n + ",");
+            for(IClusterer c : clusterers) {
+                accuracy = worstCaseExperimentRandomized(n, c, etalonClusterer, maxTime * n * n);
+                pw.print("" + accuracy + ",");
+            }
+            pw.println();
+            pw.flush();
+        }
+
+    }
+
     private static double worstCaseExperiment(int n, IClusterer clusterer, IClusterer etalonClusterer) {
         int edgeCount = n*(n-1)/2;
         long maxSeed = 1;
@@ -84,7 +116,7 @@ public class WorstCaseExperiment {
         return maxError;
     }
 
-    private static void worstCaseExperimentRandomized(int n, IClusterer clusterer, IClusterer etalonClusterer) {
+    private static double worstCaseExperimentRandomized(int n, IClusterer clusterer, IClusterer etalonClusterer, float maxTime) {
         int edgeCount = n*(n-1)/2;
         long maxSeed = 1;
         for (int i = 0; i < edgeCount; i++) {
@@ -92,7 +124,11 @@ public class WorstCaseExperiment {
         }
         long seed;
         double maxError = 0;
-        while (true) {
+        long startTime = System.currentTimeMillis();
+
+        long timeSpent = 0;
+        while (timeSpent < maxTime) {
+            timeSpent = System.currentTimeMillis() - startTime;
             seed = ThreadLocalRandom.current().nextLong(maxSeed);
             double error = experiment(seed, n, clusterer, etalonClusterer);
             if (error > maxError) {
@@ -100,6 +136,7 @@ public class WorstCaseExperiment {
                 System.out.println(error);
             }
         }
+        return maxError;
     }
 
     private static double experiment(long seed, int n, IClusterer clusterer, IClusterer etalonClusterer) {
