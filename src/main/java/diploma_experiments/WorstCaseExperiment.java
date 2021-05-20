@@ -35,11 +35,11 @@ public class WorstCaseExperiment {
         clusterers.add(new GreedLocalEndClusterer());
 
         IClusterer etalon = new BaBClusterer();
-        doExperimentRandomized(11, clusterers, etalon, 1000);
+        doExperiment(9, clusterers, etalon);
     }
 
     public static void doExperiment(int maxN, List<IClusterer> clusterers, IClusterer etalonClusterer) throws IOException {
-        String directory = "results_diploma/worst_case/";
+        String directory = "results_diploma/worst_case_at_least_4/";
 
         Path path = Paths.get(directory);
 
@@ -62,6 +62,7 @@ public class WorstCaseExperiment {
             for(IClusterer c : clusterers) {
                 accuracy = worstCaseExperiment(n, c, etalonClusterer);
                 pw.print("" + accuracy + ",");
+                System.out.println("" + n + " " + c.toString() + " " + accuracy);
             }
             pw.println();
             pw.flush();
@@ -111,6 +112,9 @@ public class WorstCaseExperiment {
             double error = experiment(seed, n, clusterer, etalonClusterer);
             if (error > maxError) {
                 maxError = error;
+            }
+            if (4 - maxError < 0.00001) {
+                return maxError;
             }
         }
         return maxError;
